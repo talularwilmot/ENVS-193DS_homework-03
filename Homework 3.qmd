@@ -25,4 +25,16 @@ salinity <- read.csv("data/salinity-pickleweed.csv")
 
 The two appropriate tests to determine the strength of the relationship between salinity and California pickleweed biomass are **Pearson’s correlation** and **linear regression**. Pearson’s correlation simply measures the strength and direction of the linear relationship between two continuous variables salinity and California pickleweed biomass. The linear regression treats salinity as the independent (predictor) variable and biomass as the dependent (response) variable, quantifying how much biomass changes with salinity and allowing prediction of biomass from salinity.
 
+## b. Create a visualization 
+```{r}
+ggplot(data = salinity, 
+       aes(x = salinity_mS_cm, 
+           y = pickleweed)) + 
+  geom_point(color = "chartreuse4") + 
+  labs(x = "Pickleweed biomass (g)", 
+       y = "Soil Salinity (mS/cm)") + 
+  theme_classic()
+
+```
+
 
