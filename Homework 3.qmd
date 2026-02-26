@@ -23,7 +23,7 @@ salinity <- read.csv("data/salinity-pickleweed.csv")
 
 ## a. An appropriate test 
 
-The two appropriate tests to determine the strength of the relationship between salinity and California pickleweed biomass are **Pearson’s correlation** and **linear regression**. Pearson’s correlation simply measures the strength and direction of the linear relationship between two continuous variables salinity and California pickleweed biomass. The linear regression treats salinity as the independent (predictor) variable and biomass as the dependent (response) variable, quantifying how much biomass changes with salinity and allowing prediction of biomass from salinity.
+The two appropriate tests to determine the strength of the relationship between salinity and California pickleweed biomass are **Pearson’s correlation** and **simple linear regression**. Pearson’s correlation simply measures the strength and direction of the linear relationship between two continuous variables salinity and California pickleweed biomass. The simple linear regression treats salinity as the independent (predictor) variable and biomass as the dependent (response) variable, quantifying how much biomass changes with salinity and allowing prediction of biomass from salinity.
 
 ## b. Create a visualization 
 ```{r}
@@ -58,11 +58,11 @@ I checked the assumptions of normality of residuals using QQplots, and homosceda
 
 ## d. Results communication 
 
-To evaluate the strength of the relationship between pickleweed biomass and soil salinity, I used a linear regression because because both variables (soil salinity in mS/cm and pickleweed biomass in grams) are continuous, and I was specifically testing whether salinity predicts changes in biomass. The test showed that soil salinity was significantly correlated to pickleweed biomass (linear regression, F(1, 21) = 8.40, R^2^ = 0.25, p = 0.009, ⍺ = 0.05). From our model coefficient estimates we found that for each 1 mS/cm increase in soil salinity pickleweed biomass increases by 2.1 ± 0.7 g. 
+To evaluate the strength of the relationship between pickleweed biomass and soil salinity, I used a simple linear regression because because both variables (soil salinity in mS/cm and pickleweed biomass in grams) are continuous, and I was specifically testing whether salinity predicts changes in biomass. The test showed that soil salinity was significantly correlated to pickleweed biomass (linear regression, F(1, 21) = 8.40, R^2^ = 0.25, p = 0.009, ⍺ = 0.05). From our model coefficient estimates we predict that for each 1 mS/cm increase in soil salinity pickleweed biomass increases by 2.1 ± 0.7(SE) g. 
 
 ## e. Test implications
 
-Our linear regression indicates a significant positive linear relationship between salinity (mS/cm) and pickleweed biomass (g) (linear regression, F(1, 21) = 8.40, R^2^ = 0.25, p = 0.009, ⍺ = 0.05), meaning that inorder for pickleweed plants to be successful they need to be in saltier conditions. This means that in the event of extreme rain or freshwater input plants may struggle to survive and potentially artificial salt addition may be necessary. This study would benefit from further sampling to solidify this relationship, but without a visible plateau in our linear model out planters should lean towards ~7.0 (mS/cm) (where highest pickleweed biomass was recorded) and above. 
+Our simple linear regression indicates a significant positive linear relationship between salinity (mS/cm) and pickleweed biomass (g) (linear regression, F(1, 21) = 8.40, R^2^ = 0.25, p = 0.009, ⍺ = 0.05), meaning that inorder for pickleweed plants to be successful they need to be in saltier conditions. This means that in the event of extreme rain or freshwater input plants may struggle to survive and potentially artificial salt addition may be necessary. This study would benefit from further sampling to solidify this relationship, but without a visible plateau in our linear model out planters should lean towards ~7.0 (mS/cm) (where highest pickleweed biomass was recorded) and above. 
 
 ## f. Double check your own work 
 ```{r}
@@ -74,5 +74,21 @@ The cor.test also shows significant correlation between salinity (mS/cm) and pic
 
 
 # Problem 2. Personal data 
+
+```{r}
+
+```
+
+# Problem 4. Statistical crituqe 
+
+## a. Revisit and summarize 
+An ANOVA or analysis of variance test is included in this paper as well as a Multivariate analysis of variance or MANOVA. The predictor variable is the year, and the response variable is the cover of species within a respective conservatism class (A-0, 1-3, 4-6, 7-10) that indicates how able to species is to thrive in altered environments.
+The ANOVA test used in this study addresses the question presented by the author by establishing if there was a significant change in species composition over the period of interest. A significant result would be a significant change in each conservatism class size between 1986 and 2019.
+**insert table from homework 2 here**
+
+## b. Visual clarity 
+The table clearly represents the data from the tests by appropriately labeling and organizing all information by conservatism class. This allows for the reader to start by looking at the overall or MANOVA results at the top and then go through each class to see if there was significance at each level. I will say the MANOVA is not clearly labeled forcing the reader to look at the caption to understand the first few rows. 
+
+## c. Aesthetic clarity 
 
 
