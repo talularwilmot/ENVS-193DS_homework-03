@@ -87,8 +87,13 @@ The ANOVA test used in this study addresses the question presented by the author
 **insert table from homework 2 here**
 
 ## b. Visual clarity 
+
 The table clearly represents the data from the tests by appropriately labeling and organizing all information by conservatism class. This allows for the reader to start by looking at the overall or MANOVA results at the top and then go through each class to see if there was significance at each level. I will say the MANOVA is not clearly labeled forcing the reader to look at the caption to understand the first few rows. 
 
 ## c. Aesthetic clarity 
 
+The authors did a good job at mitigating visual clutter but there is some repetition present. For ANOVA conservatism class is bolded and clearly not part of the table depicting results which is good. For the MANOVA the variables are also bolded but this section is not titled. Additionally variables for the ANOVA are not bolded and are re-listed for every conservatism class which is a bit repetitive. Significant results are signaled with an asterisk but that information is also repetitive as the p-value being so small clearly shows significance. 
 
+## d. 
+
+Firstly I would actually separate the MANOVA and ANOVA tables and add a title to the section displaying the MANOVA results so that it is uniform with the titles of the ANOVA results and differentiates it as a separate test. I would also bold the variables used in the ANOVA test and only list them once on the table as they remain the same for each proceeding test. Finally I would shrink the column for degrees of freedom as it has a lot of empty space and remove the asterisk from the p-value instead listing it as <0.001. 
