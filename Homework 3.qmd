@@ -27,14 +27,52 @@ The two appropriate tests to determine the strength of the relationship between 
 
 ## b. Create a visualization 
 ```{r}
-ggplot(data = salinity, 
-       aes(x = salinity_mS_cm, 
-           y = pickleweed)) + 
-  geom_point(color = "chartreuse4") + 
-  labs(x = "Pickleweed biomass (g)", 
-       y = "Soil Salinity (mS/cm)") + 
-  theme_classic()
-
+#| label: initial visualization of data
+#gg plot visualization 
+ggplot(data = salinity, #use salinity data 
+       aes(x = salinity_mS_cm, #salinity is predictor 
+           y = pickleweed)) + # pickleweed is respinse 
+  geom_point(color = "chartreuse4") + #use different color for points 
+  labs(x = "Soil salinity (mS/cm)", #use labels for points that inlcude units 
+       y = "Pickleweed biomass (g)") + 
+  theme_classic() #change theme 
 ```
+
+## c. Check your assumptions and run your test 
+
+### Run test
+```{r}
+salinity_model <- lm( #use linear regression to test for relationship 
+  pickleweed ~ salinity_mS_cm, # formula: response ~ predictor
+  data = salinity # data frame
+  ) 
+summary(salinity_model) #show summary of test 
+```
+
+### check assumptions
+```{r}
+par(mfrow = c(2, 2))
+plot(salinity_model)
+```
+I checked the assumptions of normality of residuals using QQplots, and homoscedasticity using residual vs. fitted and scale-location. The QQplot follows a linear trend showing normality of residuals, and both residuals vs. fitted and scale location show  random distribution or residuals around the horizontal line demonstrating homoscedasticity. 
+
+## d. Results communication 
+
+To evaluate the strength of the relationship between pickleweed biomass and soil salinity, I used a linear regression because because both variables (soil salinity in mS/cm and pickleweed biomass in grams) are continuous, and I was specifically testing whether salinity predicts changes in biomass. The test showed that soil salinity was significantly correlated to pickleweed biomass (linear regression, F(1, 21) = 8.40, R^2^ = 0.25, p = 0.009, ⍺ = 0.05). From our model coefficient estimates we found that for each 1 mS/cm increase in soil salinity pickleweed biomass increases by 2.1 ± 0.7 g. 
+
+## e. Test implications
+
+Our linear regression indicates a significant positive linear relationship between salinity (mS/cm) and pickleweed biomass (g) (linear regression, F(1, 21) = 8.40, R^2^ = 0.25, p = 0.009, ⍺ = 0.05), meaning that inorder for pickleweed plants to be successful they need to be in saltier conditions. This means that in the event of extreme rain or freshwater input plants may struggle to survive and potentially artificial salt addition may be necessary. This study would benefit from further sampling to solidify this relationship, but without a visible plateau in our linear model out planters should lean towards ~7.0 (mS/cm) (where highest pickleweed biomass was recorded) and above. 
+
+## f. Double check your own work 
+```{r}
+cor.test(salinity$salinity_mS_cm, salinity$pickleweed, #use salinity data to test for correlation
+         method = "pearson") #use pearson correlation test 
+```
+
+The cor.test also shows significant correlation between salinity (mS/cm) and pickleweed biomass (g) (cor = 0.53, t(21) = 2.90, p = 0.009, ⍺ = 0.05). These results led us to the same conclusion of rejecting the null hypothesis that there is no relationship between the variables, however this test does not provide any direction of correlation or differentiate between predictor and explanatory variables, like the linear regression allows for.  
+
+
+# Problem 2. Personal data 
 
 
