@@ -137,6 +137,7 @@ theme(plot.title = element_text(size=12))  #change title font size
 
 # Problem 3. 
 
+
 # Problem 4. Statistical crituqe
 
 ## a. Revisit and summarize
