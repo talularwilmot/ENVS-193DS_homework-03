@@ -102,7 +102,7 @@ scale_color_manual(values = c("Running" = "aquamarine3",  #give a unique color t
                               "Surfing" = "blue", 
                               "Climbing" = "darkorange", 
                               "Tennis" = "green")) + 
-labs(title = "Fig. 1 Duration of the workout based on type of exercise completed", #title 
+labs(title = "Duration of the workout based on type of exercise completed", #title 
       x = "Workout Type", #x-axis title 
       y = "Duration (hr:mm:ss)", 
      subtitle = "2/26/2026") + #y-axis title including units
@@ -121,7 +121,7 @@ ggplot(data = running_data, #use the clean name version of personal data
        aes(x = distance_mi, # x-axis
            y = pace)) + #y-axis
 geom_point(color = "cornflowerblue") +#color the points
-labs(title = "Fig 2. Running Mileage vs. pace", #title 
+labs(title = "Running Mileage vs. pace", #title 
      x = "Distance (mi)", #x-axis title
      y = "Pace (h:mm:ss)", #y-axis title 
      subtitle = "2/25/2026") + #add subtitle that is the date of the last recorded observation 
@@ -135,7 +135,22 @@ theme(plot.title = element_text(size=12))  #change title font size
 
 **Figure 2. Scatterplot of running distance against average pace for the duration of the workout** Blue points represent average pace of workout (h:mm:ss) at different mileage totals. Data were collected by the author from 1/15/2026 - 2/25/2026 as noted in subtitle. Accessed via csv download. 
 
-# Problem 3. 
+# Problem 3. Affective Visualization 
+
+## a. 
+
+For my personal data I am thinking of doing a watercolor painting with black pen illustrating parts of the painting. I plan on having a path meander through the center of the page representing running as the focal point of my workouts and also a representation of time. Each block on the path will represent a day that an activity was recorded with points points that are not running having a distinct icon, and a a runner at the start and the end line to represent how workout went all the way through. In order to include more variables like workout duration and pace, the shade of the block will represent the duration of the workout with darker shades showing longer duration. Outside of the blocks the depiction of the weather above them will represent the weather on the day of that activity. 
+
+## b. Sketch 
+
+![Affective Visual Sketch](~/Desktop/ENVS 193DS/Visual_Draft.png)
+
+## c. Rough Draft  
+
+## d. Artist Statement 
+
+## e. Link 
+
 
 
 # Problem 4. Statistical crituqe
