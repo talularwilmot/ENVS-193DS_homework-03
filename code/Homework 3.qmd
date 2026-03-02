@@ -80,6 +80,8 @@ The cor.test also shows significant correlation between salinity (mS/cm) and pic
 
 # Problem 2. Personal data
 
+## a. 
+
 ```{r}
 personal_clean <- clean_names(Personal) #clean column names in personal data 
 #| label: Visualization Categorical
@@ -131,7 +133,7 @@ ggplot(data = workouts_filtered, #use the filtered version of personal data
   theme(plot.title = element_text(size=12))  #making the title font smaller
 ```
 
-
+### Extra Analysis for personal interest 
 ```{r}
 #| label: Visualization Continuous
 running_data <- personal_clean %>% 
@@ -142,11 +144,17 @@ ggplot(data = running_data, #use the clean name version of personal data
 geom_point(color = "cornflowerblue") + #color the points
 labs(title = "Running Mileage vs. pace", #title 
      x = "Distance (mi)", #x-axis title
-     y = "Pace (mm:ss)", 
+     y = "Pace (h:mm:ss)", 
      subtitle = "2/25/2026") + #y-axis title  
 theme_minimal() + #different theme from default 
 theme(plot.title = element_text(size=12))  #making the title font smaller
 ```
+
+## b. Captions 
+
+**Figure 1. Jitterplot of workout duration categorized by type** Points represent measurement for duration of workout and are colored according to workout type: Biking, climbing, gym, running, surfing, tennis. Data collected by the author. Accessed via csv download. 
+
+
 
 # Problem 4. Statistical crituqe
 
