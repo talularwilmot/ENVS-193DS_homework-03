@@ -83,8 +83,9 @@ The cor.test also shows significant correlation between salinity (mS/cm) and pic
 ## a. 
 
 ```{r}
-personal_clean <- clean_names(Personal) #clean column names in personal data 
 #| label: Visualization Categorical
+
+personal_clean <- clean_names(Personal) #clean column names in personal data 
 
 ggplot(data = personal_clean, #use personal data 
        aes(x = workout_type, # x-axis
@@ -101,7 +102,7 @@ scale_color_manual(values = c("Running" = "aquamarine3",  #give a unique color t
                               "Surfing" = "blue", 
                               "Climbing" = "darkorange", 
                               "Tennis" = "green")) + 
-labs(title = "Duration of the workout based on type of exercise completed", #title 
+labs(title = "Fig. 1 Duration of the workout based on type of exercise completed", #title 
       x = "Workout Type", #x-axis title 
       y = "Duration (hr:mm:ss)", 
      subtitle = "2/26/2026") + #y-axis title including units
@@ -111,50 +112,30 @@ labs(title = "Duration of the workout based on type of exercise completed", #tit
 ```
 
 
-```{r}
-#| label: Visualization Continuous
-workouts_filtered <- personal_clean %>%
-  filter(workout_type != "Tennis") # filter out the tennis workout because it was an extreme outlier 
-ggplot(data = workouts_filtered, #use the filtered version of personal data 
-       aes(x = hours_slept, # x-axis
-           y = duration)) + #y-axis
-  geom_point(aes(color = workout_type)) + 
-  scale_color_manual(values = c("Biking" = "#1F78B4", #change colors from default and make them specific to workout type 
-                                "Climbing" = "#FF7F00", 
-                                "Gym" = "#33A02C", 
-                                "Running" = "#9E3C9A", 
-                                "Surfing" = "#E31A1C")) +
-  geom_smooth(method = "lm", se = FALSE, color = "black") + #color the points
-  labs(title = "Hours Slept vs. Duration of Workout the Following Day", #title 
-     x = "Hours Slept", #x-axis title
-     y = "Duration (hr:mm:ss)", 
-     subtitle = "2/26/2026") + #y-axis title  
-  theme_minimal() + #different theme from default 
-  theme(plot.title = element_text(size=12))  #making the title font smaller
-```
-
 ### Extra Analysis for personal interest 
 ```{r}
 #| label: Visualization Continuous
-running_data <- personal_clean %>% 
+running_data <- personal_clean %>% #use to personal_clean data and filter to only include rows with the workout type equal to running 
   filter(workout_type == "Running") 
 ggplot(data = running_data, #use the clean name version of personal data 
        aes(x = distance_mi, # x-axis
            y = pace)) + #y-axis
-geom_point(color = "cornflowerblue") + #color the points
-labs(title = "Running Mileage vs. pace", #title 
+geom_point(color = "cornflowerblue") +#color the points
+labs(title = "Fig 2. Running Mileage vs. pace", #title 
      x = "Distance (mi)", #x-axis title
-     y = "Pace (h:mm:ss)", 
-     subtitle = "2/25/2026") + #y-axis title  
+     y = "Pace (h:mm:ss)", #y-axis title 
+     subtitle = "2/25/2026") + #add subtitle that is the date of the last recorded observation 
 theme_minimal() + #different theme from default 
-theme(plot.title = element_text(size=12))  #making the title font smaller
+theme(plot.title = element_text(size=12))  #change title font size
 ```
 
 ## b. Captions 
 
-**Figure 1. Jitterplot of workout duration categorized by type** Points represent measurement for duration of workout and are colored according to workout type: Biking, climbing, gym, running, surfing, tennis. Data collected by the author. Accessed via csv download. 
+**Figure 1. Jitterplot of workout duration categorized by type of workout** Points represent measurement for duration of workout and are colored according to workout type: Biking, climbing, gym, running, surfing, tennis. Data collected by the author from 1/15/2026 - 2/26/2026. Accessed via csv download. 
 
+**Figure 2. Scatterplot of running distance against average pace for the duration of the workout** Blue points represent average pace of workout (h:mm:ss) at different mileage totals. Data were collected by the author from 1/15/2026 - 2/25/2026 as noted in subtitle. Accessed via csv download. 
 
+# Problem 3. 
 
 # Problem 4. Statistical crituqe
 
