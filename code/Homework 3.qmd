@@ -143,21 +143,27 @@ For my personal data I am thinking of doing a watercolor painting with black pen
 
 ## b. Sketch 
 
-![Affective Visual Sketch](~/Desktop/ENVS 193DS/Visual_Draft.png)
+![Affective Visual Sketch](Visual_Draft.png)
 
 ## c. Rough Draft  
 
+
 ## d. Artist Statement 
+
+My piece is demonstrating the journey of my workouts over the course of this quarter with an emphasis on running throughout. In my medium and presentation I took inspiration from Jill Pelto's paintings as they also use water color to depict statistical trends. I created this work by first doing some very light sketching just to outline the painting followed by water color to do the bulk of the picture, blocking it out and adding color and the finer details I used black pen. 
 
 ## e. Link 
 
+[View](https://docs.google.com/presentation/d/1bZh40zt9ZVkJDKZNU7cD2fJyYqCPFJibfgQmomVobtk/edit?slide=id.p#slide=id.p)
 
 
 # Problem 4. Statistical crituqe
 
 ## a. Revisit and summarize
 
-An ANOVA or analysis of variance test is included in this paper as well as a Multivariate analysis of variance or MANOVA. The predictor variable is the year, and the response variable is the cover of species within a respective conservatism class (A-0, 1-3, 4-6, 7-10) that indicates how able to species is to thrive in altered environments. The ANOVA test used in this study addresses the question presented by the author by establishing if there was a significant change in species composition over the period of interest. A significant result would be a significant change in each conservatism class size between 1986 and 2019. **insert table from homework 2 here**
+An ANOVA or analysis of variance test is included in this paper as well as a Multivariate analysis of variance or MANOVA. The predictor variable is the year, and the response variable is the cover of species within a respective conservatism class (A-0, 1-3, 4-6, 7-10) that indicates how able to species is to thrive in altered environments. The ANOVA test used in this study addresses the question presented by the author by establishing if there was a significant change in species composition over the period of interest. A significant result would be a significant change in each conservatism class size between 1986 and 2019. 
+
+![Affective Visual Sketch](Stat_critique_table 2.png)
 
 ## b. Visual clarity
 
@@ -167,6 +173,6 @@ The table clearly represents the data from the tests by appropriately labeling a
 
 The authors did a good job at mitigating visual clutter but there is some repetition present. For ANOVA conservatism class is bolded and clearly not part of the table depicting results which is good. For the MANOVA the variables are also bolded but this section is not titled. Additionally variables for the ANOVA are not bolded and are re-listed for every conservatism class which is a bit repetitive. Significant results are signaled with an asterisk but that information is also repetitive as the p-value being so small clearly shows significance.
 
-## d.
+## d.Recommendations 
 
 Firstly I would actually separate the MANOVA and ANOVA tables and add a title to the section displaying the MANOVA results so that it is uniform with the titles of the ANOVA results and differentiates it as a separate test. I would also bold the variables used in the ANOVA test and only list them once on the table as they remain the same for each proceeding test. Finally I would shrink the column for degrees of freedom as it has a lot of empty space and remove the asterisk from the p-value instead listing it as \<0.001.
