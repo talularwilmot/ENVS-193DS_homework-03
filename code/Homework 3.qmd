@@ -163,7 +163,7 @@ My piece is demonstrating the journey of my workouts over the course of this qua
 
 An ANOVA or analysis of variance test is included in this paper as well as a Multivariate analysis of variance or MANOVA. The predictor variable is the year, and the response variable is the cover of species within a respective conservatism class (A-0, 1-3, 4-6, 7-10) that indicates how able to species is to thrive in altered environments. The ANOVA test used in this study addresses the question presented by the author by establishing if there was a significant change in species composition over the period of interest. A significant result would be a significant change in each conservatism class size between 1986 and 2019. 
 
-![Affective Visual Sketch](Stat_critique_table 2.png)
+![Table](Stat_critique_table 2.png)
 
 ## b. Visual clarity
 
