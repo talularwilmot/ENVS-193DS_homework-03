@@ -55,8 +55,8 @@ summary(salinity_model) #show summary of test
 ### check assumptions
 
 ```{r}
-par(mfrow = c(2, 2))
-plot(salinity_model)
+par(mfrow = c(2, 2)) #arrange plots in a 2 by 2 grid 
+plot(salinity_model) #plot the linear model for salinty data 
 ```
 
 I checked the assumptions of normality of residuals using QQplots, and homoscedasticity using residual vs. fitted and scale-location. The QQplot follows a linear trend showing normality of residuals, and both residuals vs. fitted and scale location show random distribution or residuals around the horizontal line demonstrating homoscedasticity.
