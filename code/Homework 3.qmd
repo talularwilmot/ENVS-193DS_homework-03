@@ -15,6 +15,8 @@ library(tidyverse)
 library(here)
 library(janitor)
 library(readxl)
+library(tidyverse)
+library(dplyr)
 #read in data from data folder 
 salinity <- read.csv("~/Desktop/ENVS 193DS/Homeworks/Homework 3/ENVS-193DS_homework-03/data/salinity-pickleweed.csv")
 Personal <- read_csv("~/Desktop/ENVS 193DS/Homeworks/Homework 3/ENVS-193DS_homework-03/data/My Data ES 193 - Sheet1.csv") #read in my data and relabel 
@@ -24,7 +26,7 @@ Personal <- read_csv("~/Desktop/ENVS 193DS/Homeworks/Homework 3/ENVS-193DS_homew
 
 ## a. An appropriate test
 
-The two appropriate tests to determine the strength of the relationship between salinity and California pickleweed biomass are **Pearson’s correlation** and **simple linear regression**. Pearson’s correlation simply measures the strength and direction of the linear relationship between two continuous variables salinity and California pickleweed biomass. The simple linear regression treats salinity as the independent (predictor) variable and biomass as the dependent (response) variable, quantifying how much biomass changes with salinity and allowing prediction of biomass from salinity.
+The two appropriate tests to determine the strength of the relationship between salinity and California pickleweed biomass are **Pearson’s correlation** and **Spearman's correlation**. Pearson’s correlation measures the strength and direction of the linear relationship between two continuous variables salinity and California Pickleweed biomass. The Spearman's correlation measures the monotonic relationship, (if it is linear or not) based on the ranked values rather than the raw data and does not show the direction of the relationship. 
 
 ## b. Create a visualization
 
@@ -42,41 +44,43 @@ ggplot(data = salinity, #use salinity data
 
 ## c. Check your assumptions and run your test
 
-### Run test
+### Check assumptions
 
 ```{r}
-salinity_model <- lm( #use linear regression to test for relationship 
-  pickleweed ~ salinity_mS_cm, # formula: response ~ predictor
-  data = salinity # data frame
-  ) 
-summary(salinity_model) #show summary of test 
+ggplot(data = salinity, # starting data frame
+       aes(sample = `pickleweed`)) + # show normality of pickleweed variable for QQ plot (no x-axis)
+ geom_qq()
+
+ggplot(data = salinity, # starting data frame
+       aes(sample = `salinity_mS_cm`)) + # show normality of salinity variable for QQ plot (no x-axis)
+ geom_qq()
+
 ```
 
-### check assumptions
+I checked the assumptions of normality of the continuous variables using QQplots, and linearity using the scatterplot shown in 1b. The QQplots follow a linear trend showing normality with no significant outliers, and the visualization shows a linear trend for the data points using salinity as the predictor and pickleweed as the response.
 
-```{r}
-par(mfrow = c(2, 2)) #arrange plots in a 2 by 2 grid 
-plot(salinity_model) #plot the linear model for salinty data 
-```
-
-I checked the assumptions of normality of residuals using QQplots, and homoscedasticity using residual vs. fitted and scale-location. The QQplot follows a linear trend showing normality of residuals, and both residuals vs. fitted and scale location show random distribution or residuals around the horizontal line demonstrating homoscedasticity.
-
-## d. Results communication
-
-To evaluate the strength of the relationship between pickleweed biomass and soil salinity, I used a simple linear regression because because both variables (soil salinity in mS/cm and pickleweed biomass in grams) are continuous, and I was specifically testing whether salinity predicts changes in biomass. The test showed that soil salinity was significantly correlated to pickleweed biomass (linear regression, F(1, 21) = 8.40, R^2^ = 0.25, p = 0.009, ⍺ = 0.05). From our model coefficient estimates we predict that for each 1 mS/cm increase in soil salinity pickleweed biomass increases by 2.1 ± 0.7(SE) g.
-
-## e. Test implications
-
-Our simple linear regression indicates a significant positive linear relationship between salinity (mS/cm) and pickleweed biomass (g) (linear regression, F(1, 21) = 8.40, R^2^ = 0.25, p = 0.009, ⍺ = 0.05), meaning that inorder for pickleweed plants to be successful they need to be in saltier conditions. This means that in the event of extreme rain or freshwater input plants may struggle to survive and potentially artificial salt addition may be necessary. This study would benefit from further sampling to solidify this relationship, but without a visible plateau in our linear model out planters should lean towards \~7.0 (mS/cm) (where highest pickleweed biomass was recorded) and above.
-
-## f. Double check your own work
-
+### Run Test
 ```{r}
 cor.test(salinity$salinity_mS_cm, salinity$pickleweed, #use salinity data to test for correlation
          method = "pearson") #use pearson correlation test 
 ```
 
-The cor.test also shows significant correlation between salinity (mS/cm) and pickleweed biomass (g) (cor = 0.53, t(21) = 2.90, p = 0.009, ⍺ = 0.05). These results led us to the same conclusion of rejecting the null hypothesis that there is no relationship between the variables, however this test does not provide any direction of correlation or differentiate between predictor and explanatory variables, like the linear regression allows for.
+## d. Results communication
+
+To evaluate the strength of the relationship between pickleweed biomass and soil salinity, I used a Pearson's correlation because because both variables (soil salinity in mS/cm and pickleweed biomass in grams) are continuous, normally distributed, and showed linearity with each other. The test showed that there was significantly correlation between salinity (mS/cm) and pickleweed biomass (Pearson's correlation, t(21) = 2.9, p = 0.009, ⍺ = 0.05, 95% CI: 0.16, 0.78). 
+
+## e. Test implications
+
+Our Pearson's correlation indicates a significant positive linear relationship between salinity (mS/cm) and pickleweed biomass (g), meaning that in order for pickleweed plants to be successful they need to be in saltier conditions. This means that in the event of extreme rain or freshwater input plants may struggle to survive and potentially artificial salt addition may be necessary. This study would benefit from further sampling to solidify this relationship, but without a visible plateau in our scatterplot visualization out planters should lean towards higher salinity. 
+
+## f. Double check your own work
+
+```{r}
+cor.test(salinity$salinity_mS_cm, salinity$pickleweed, #use salinity data to test for correlation
+         method = "spearman") #use pearson correlation test 
+```
+
+The Spearman's correlation also shows significant correlation between salinity (mS/cm) and pickleweed biomass (g) (rho = 0.59, S = 824, p = 0.003, ⍺ = 0.05). These results led us to the same conclusion of rejecting the null hypothesis that there is no relationship between the variables, however this test uses rank based values rather than raw data so it only asses monotonic relationships not necessarily showing us that the variables are changing at a constant rate. 
 
 # Problem 2. Personal data
 

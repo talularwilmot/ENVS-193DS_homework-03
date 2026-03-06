@@ -113,15 +113,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#read in data from data folder </span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>salinity <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Desktop/ENVS 193DS/Homeworks/Homework 3/ENVS-193DS_homework-03/data/salinity-pickleweed.csv"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Personal <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"~/Desktop/ENVS 193DS/Homeworks/Homework 3/ENVS-193DS_homework-03/data/My Data ES 193 - Sheet1.csv"</span>) <span class="co">#read in my data and relabel </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#read in data from data folder </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>salinity <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Desktop/ENVS 193DS/Homeworks/Homework 3/ENVS-193DS_homework-03/data/salinity-pickleweed.csv"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Personal <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"~/Desktop/ENVS 193DS/Homeworks/Homework 3/ENVS-193DS_homework-03/data/My Data ES 193 - Sheet1.csv"</span>) <span class="co">#read in my data and relabel </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="problem-1.-slough-soil-salinity" class="level1">
 <h1>Problem 1. Slough soil salinity</h1>
 <section id="a.-an-appropriate-test" class="level2">
 <h2 class="anchored" data-anchor-id="a.-an-appropriate-test">a. An appropriate test</h2>
-<p>The two appropriate tests to determine the strength of the relationship between salinity and California pickleweed biomass are <strong>Pearson’s correlation</strong> and <strong>simple linear regression</strong>. Pearson’s correlation simply measures the strength and direction of the linear relationship between two continuous variables salinity and California pickleweed biomass. The simple linear regression treats salinity as the independent (predictor) variable and biomass as the dependent (response) variable, quantifying how much biomass changes with salinity and allowing prediction of biomass from salinity.</p>
+<p>The two appropriate tests to determine the strength of the relationship between salinity and California pickleweed biomass are <strong>Pearson’s correlation</strong> and <strong>Spearman’s correlation</strong>. Pearson’s correlation measures the strength and direction of the linear relationship between two continuous variables salinity and California Pickleweed biomass. The Spearman’s correlation measures the monotonic relationship, (if it is linear or not) based on the ranked values rather than the raw data and does not show the direction of the relationship.</p>
 </section>
 <section id="b.-create-a-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="b.-create-a-visualization">b. Create a visualization</h2>
@@ -145,65 +147,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="c.-check-your-assumptions-and-run-your-test" class="level2">
 <h2 class="anchored" data-anchor-id="c.-check-your-assumptions-and-run-your-test">c.&nbsp;Check your assumptions and run your test</h2>
-<section id="run-test" class="level3">
-<h3 class="anchored" data-anchor-id="run-test">Run test</h3>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>salinity_model <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="co">#use linear regression to test for relationship </span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  pickleweed <span class="sc">~</span> salinity_mS_cm, <span class="co"># formula: response ~ predictor</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> salinity <span class="co"># data frame</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  ) </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(salinity_model) <span class="co">#show summary of test </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = pickleweed ~ salinity_mS_cm, data = salinity)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--12.499  -5.819  -1.726   4.794  21.765 
-
-Coefficients:
-               Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)     13.0895     4.0350   3.244  0.00389 **
-salinity_mS_cm   2.0832     0.7188   2.898  0.00860 **
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 9.144 on 21 degrees of freedom
-Multiple R-squared:  0.2857,    Adjusted R-squared:  0.2517 
-F-statistic: 8.398 on 1 and 21 DF,  p-value: 0.008605</code></pre>
-</div>
-</div>
-</section>
 <section id="check-assumptions" class="level3">
-<h3 class="anchored" data-anchor-id="check-assumptions">check assumptions</h3>
+<h3 class="anchored" data-anchor-id="check-assumptions">Check assumptions</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="co">#arrange plots in a 2 by 2 grid </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(salinity_model) <span class="co">#plot the linear model for salinty data </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> salinity, <span class="co"># starting data frame</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">sample =</span> <span class="st">`</span><span class="at">pickleweed</span><span class="st">`</span>)) <span class="sc">+</span> <span class="co"># show normality of pickleweed variable for QQ plot (no x-axis)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_qq</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Homework-3_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Homework-3_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> salinity, <span class="co"># starting data frame</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">sample =</span> <span class="st">`</span><span class="at">salinity_mS_cm</span><span class="st">`</span>)) <span class="sc">+</span> <span class="co"># show normality of salinity variable for QQ plot (no x-axis)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_qq</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Homework-3_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>I checked the assumptions of normality of residuals using QQplots, and homoscedasticity using residual vs.&nbsp;fitted and scale-location. The QQplot follows a linear trend showing normality of residuals, and both residuals vs.&nbsp;fitted and scale location show random distribution or residuals around the horizontal line demonstrating homoscedasticity.</p>
+<p>I checked the assumptions of normality of the continuous variables using QQplots, and linearity using the scatterplot shown in 1b. The QQplots follow a linear trend showing normality with no significant outliers, and the visualization shows a linear trend for the data points using salinity as the predictor and pickleweed as the response.</p>
 </section>
-</section>
-<section id="d.-results-communication" class="level2">
-<h2 class="anchored" data-anchor-id="d.-results-communication">d.&nbsp;Results communication</h2>
-<p>To evaluate the strength of the relationship between pickleweed biomass and soil salinity, I used a simple linear regression because because both variables (soil salinity in mS/cm and pickleweed biomass in grams) are continuous, and I was specifically testing whether salinity predicts changes in biomass. The test showed that soil salinity was significantly correlated to pickleweed biomass (linear regression, F(1, 21) = 8.40, R<sup>2</sup> = 0.25, p = 0.009, ⍺ = 0.05). From our model coefficient estimates we predict that for each 1 mS/cm increase in soil salinity pickleweed biomass increases by 2.1 ± 0.7(SE) g.</p>
-</section>
-<section id="e.-test-implications" class="level2">
-<h2 class="anchored" data-anchor-id="e.-test-implications">e. Test implications</h2>
-<p>Our simple linear regression indicates a significant positive linear relationship between salinity (mS/cm) and pickleweed biomass (g) (linear regression, F(1, 21) = 8.40, R<sup>2</sup> = 0.25, p = 0.009, ⍺ = 0.05), meaning that inorder for pickleweed plants to be successful they need to be in saltier conditions. This means that in the event of extreme rain or freshwater input plants may struggle to survive and potentially artificial salt addition may be necessary. This study would benefit from further sampling to solidify this relationship, but without a visible plateau in our linear model out planters should lean towards ~7.0 (mS/cm) (where highest pickleweed biomass was recorded) and above.</p>
-</section>
-<section id="f.-double-check-your-own-work" class="level2">
-<h2 class="anchored" data-anchor-id="f.-double-check-your-own-work">f.&nbsp;Double check your own work</h2>
+<section id="run-test" class="level3">
+<h3 class="anchored" data-anchor-id="run-test">Run Test</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(salinity<span class="sc">$</span>salinity_mS_cm, salinity<span class="sc">$</span>pickleweed, <span class="co">#use salinity data to test for correlation</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"pearson"</span>) <span class="co">#use pearson correlation test </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(salinity<span class="sc">$</span>salinity_mS_cm, salinity<span class="sc">$</span>pickleweed, <span class="co">#use salinity data to test for correlation</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"pearson"</span>) <span class="co">#use pearson correlation test </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -218,7 +192,34 @@ sample estimates:
 0.5344778 </code></pre>
 </div>
 </div>
-<p>The cor.test also shows significant correlation between salinity (mS/cm) and pickleweed biomass (g) (cor = 0.53, t(21) = 2.90, p = 0.009, ⍺ = 0.05). These results led us to the same conclusion of rejecting the null hypothesis that there is no relationship between the variables, however this test does not provide any direction of correlation or differentiate between predictor and explanatory variables, like the linear regression allows for.</p>
+</section>
+</section>
+<section id="d.-results-communication" class="level2">
+<h2 class="anchored" data-anchor-id="d.-results-communication">d.&nbsp;Results communication</h2>
+<p>To evaluate the strength of the relationship between pickleweed biomass and soil salinity, I used a Pearson’s correlation because because both variables (soil salinity in mS/cm and pickleweed biomass in grams) are continuous, normally distributed, and showed linearity with each other. The test showed that there was significantly correlation between salinity (mS/cm) and pickleweed biomass (Pearson’s correlation, t(21) = 2.9, p = 0.009, ⍺ = 0.05, 95% CI: 0.16, 0.78).</p>
+</section>
+<section id="e.-test-implications" class="level2">
+<h2 class="anchored" data-anchor-id="e.-test-implications">e. Test implications</h2>
+<p>Our Pearson’s correlation indicates a significant positive linear relationship between salinity (mS/cm) and pickleweed biomass (g), meaning that in order for pickleweed plants to be successful they need to be in saltier conditions. This means that in the event of extreme rain or freshwater input plants may struggle to survive and potentially artificial salt addition may be necessary. This study would benefit from further sampling to solidify this relationship, but without a visible plateau in our scatterplot visualization out planters should lean towards higher salinity.</p>
+</section>
+<section id="f.-double-check-your-own-work" class="level2">
+<h2 class="anchored" data-anchor-id="f.-double-check-your-own-work">f.&nbsp;Double check your own work</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(salinity<span class="sc">$</span>salinity_mS_cm, salinity<span class="sc">$</span>pickleweed, <span class="co">#use salinity data to test for correlation</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"spearman"</span>) <span class="co">#use pearson correlation test </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Spearman's rank correlation rho
+
+data:  salinity$salinity_mS_cm and salinity$pickleweed
+S = 824, p-value = 0.003426
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.5928854 </code></pre>
+</div>
+</div>
+<p>The Spearman’s correlation also shows significant correlation between salinity (mS/cm) and pickleweed biomass (g) (rho = 0.59, S = 824, p = 0.003, ⍺ = 0.05). These results led us to the same conclusion of rejecting the null hypothesis that there is no relationship between the variables, however this test uses rank based values rather than raw data so it only asses monotonic relationships not necessarily showing us that the variables are changing at a constant rate.</p>
 </section>
 </section>
 <section id="problem-2.-personal-data" class="level1">
@@ -226,30 +227,30 @@ sample estimates:
 <section id="a." class="level2">
 <h2 class="anchored" data-anchor-id="a.">a.</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>personal_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(Personal) <span class="co">#clean column names in personal data </span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> personal_clean, <span class="co">#use personal data </span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> workout_type, <span class="co"># x-axis</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> duration,<span class="co"># y-axis</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> workout_type)) <span class="sc">+</span> <span class="co"># color by workout type </span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="co"># no jitter in the vertical direction</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">width =</span> <span class="fl">0.3</span>, <span class="co"># smaller jitter in the horizontal direction</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">alpha =</span> <span class="dv">1</span>, <span class="co"># make the points more transparent</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">shape =</span> <span class="dv">20</span>, <span class="co">#closed circle shape </span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="co">#enlarge the shape of the points </span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Running"</span> <span class="ot">=</span> <span class="st">"aquamarine3"</span>,  <span class="co">#give a unique color to each type of workout </span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Biking"</span> <span class="ot">=</span> <span class="st">"cyan4"</span>, </span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Gym"</span> <span class="ot">=</span> <span class="st">"slateblue"</span>, </span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Surfing"</span> <span class="ot">=</span> <span class="st">"blue"</span>, </span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Climbing"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>, </span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Tennis"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span> </span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Duration of the workout based on type of exercise completed"</span>, <span class="co">#title </span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Workout Type"</span>, <span class="co">#x-axis title </span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Duration (hr:mm:ss)"</span>, </span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">subtitle =</span> <span class="st">"2/26/2026"</span>) <span class="sc">+</span> <span class="co">#y-axis title including units</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="co">#theme black and white </span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>, <span class="co"># getting rid of the legend</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="co"># making the title font smaller</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>personal_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(Personal) <span class="co">#clean column names in personal data </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> personal_clean, <span class="co">#use personal data </span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> workout_type, <span class="co"># x-axis</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> duration,<span class="co"># y-axis</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> workout_type)) <span class="sc">+</span> <span class="co"># color by workout type </span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="co"># no jitter in the vertical direction</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">width =</span> <span class="fl">0.3</span>, <span class="co"># smaller jitter in the horizontal direction</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">alpha =</span> <span class="dv">1</span>, <span class="co"># make the points more transparent</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">shape =</span> <span class="dv">20</span>, <span class="co">#closed circle shape </span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="co">#enlarge the shape of the points </span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Running"</span> <span class="ot">=</span> <span class="st">"aquamarine3"</span>,  <span class="co">#give a unique color to each type of workout </span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Biking"</span> <span class="ot">=</span> <span class="st">"cyan4"</span>, </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Gym"</span> <span class="ot">=</span> <span class="st">"slateblue"</span>, </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Surfing"</span> <span class="ot">=</span> <span class="st">"blue"</span>, </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Climbing"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>, </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Tennis"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span> </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Duration of the workout based on type of exercise completed"</span>, <span class="co">#title </span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Workout Type"</span>, <span class="co">#x-axis title </span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Duration (hr:mm:ss)"</span>, </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">subtitle =</span> <span class="st">"2/26/2026"</span>) <span class="sc">+</span> <span class="co">#y-axis title including units</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="co">#theme black and white </span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>, <span class="co"># getting rid of the legend</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="co"># making the title font smaller</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -261,18 +262,18 @@ sample estimates:
 <section id="extra-analysis-for-personal-interest" class="level3">
 <h3 class="anchored" data-anchor-id="extra-analysis-for-personal-interest">Extra Analysis for personal interest</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>running_data <span class="ot">&lt;-</span> personal_clean <span class="sc">%&gt;%</span> <span class="co">#use to personal_clean data and filter to only include rows with the workout type equal to running </span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(workout_type <span class="sc">==</span> <span class="st">"Running"</span>) </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> running_data, <span class="co">#use the clean name version of personal data </span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> distance_mi, <span class="co"># x-axis</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> pace)) <span class="sc">+</span> <span class="co">#y-axis</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"cornflowerblue"</span>) <span class="sc">+</span><span class="co">#color the points</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Running Mileage vs. pace"</span>, <span class="co">#title </span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Distance (mi)"</span>, <span class="co">#x-axis title</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="st">"Pace (h:mm:ss)"</span>, <span class="co">#y-axis title </span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">subtitle =</span> <span class="st">"2/25/2026"</span>) <span class="sc">+</span> <span class="co">#add subtitle that is the date of the last recorded observation </span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="co">#different theme from default </span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>))  <span class="co">#change title font size</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>running_data <span class="ot">&lt;-</span> personal_clean <span class="sc">%&gt;%</span> <span class="co">#use to personal_clean data and filter to only include rows with the workout type equal to running </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(workout_type <span class="sc">==</span> <span class="st">"Running"</span>) </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> running_data, <span class="co">#use the clean name version of personal data </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> distance_mi, <span class="co"># x-axis</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> pace)) <span class="sc">+</span> <span class="co">#y-axis</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"cornflowerblue"</span>) <span class="sc">+</span><span class="co">#color the points</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Running Mileage vs. pace"</span>, <span class="co">#title </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Distance (mi)"</span>, <span class="co">#x-axis title</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="st">"Pace (h:mm:ss)"</span>, <span class="co">#y-axis title </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">subtitle =</span> <span class="st">"2/25/2026"</span>) <span class="sc">+</span> <span class="co">#add subtitle that is the date of the last recorded observation </span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="co">#different theme from default </span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>))  <span class="co">#change title font size</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
