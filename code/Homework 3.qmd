@@ -77,7 +77,7 @@ Our Pearson's correlation indicates a significant positive linear relationship b
 
 ```{r}
 cor.test(salinity$salinity_mS_cm, salinity$pickleweed, #use salinity data to test for correlation
-         method = "spearman") #use pearson correlation test 
+         method = "spearman") #use spearman correlation test 
 ```
 
 The Spearman's correlation also shows significant correlation between salinity (mS/cm) and pickleweed biomass (g) (rho = 0.59, S = 824, p = 0.003, ⍺ = 0.05). These results led us to the same conclusion of rejecting the null hypothesis that there is no relationship between the variables, however this test uses rank based values rather than raw data so it only asses monotonic relationships not necessarily showing us that the variables are changing at a constant rate. 
