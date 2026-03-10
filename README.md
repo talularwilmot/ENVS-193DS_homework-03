@@ -4,3 +4,5 @@ This repo is for ENVS 193DS homework-03 exploring appropriate tests and visualiz
 The code file contains all code written for the assignment as well as images used in the rendered output. 
 
 Data file contains all data used in the assignment (salinity, and personal data). 
+
+Rendered output: https://talularwilmot.github.io/ENVS-193DS_homework-03/code/Homework%203.html
