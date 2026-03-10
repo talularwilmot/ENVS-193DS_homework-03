@@ -1,7 +1,10 @@
 ---
 title: "Homework 3"
 author: "Talula Wilmot"
-format: html
+format: 
+  html: 
+    toc: true 
+    toc-location: right 
 editor: visual
 ---
 
@@ -26,7 +29,7 @@ Personal <- read_csv("~/Desktop/ENVS 193DS/Homeworks/Homework 3/ENVS-193DS_homew
 
 ## a. An appropriate test
 
-The two appropriate tests to determine the strength of the relationship between salinity and California pickleweed biomass are **Pearson’s correlation** and **Spearman's correlation**. Pearson’s correlation measures the strength and direction of the linear relationship between two continuous variables salinity and California Pickleweed biomass. The Spearman's correlation measures the monotonic relationship, (if it is linear or not) based on the ranked values rather than the raw data and does not show the direction of the relationship. 
+The two appropriate tests to determine the strength of the relationship between salinity and California pickleweed biomass are **Pearson’s correlation** and **Spearman's correlation**. Pearson’s correlation measures the strength and direction of the linear relationship between two continuous variables salinity and California Pickleweed biomass. The Spearman's correlation measures the monotonic relationship, (if it is linear or not) based on the ranked values rather than the raw data and does not show the direction of the relationship.
 
 ## b. Create a visualization
 
@@ -49,17 +52,20 @@ ggplot(data = salinity, #use salinity data
 ```{r}
 ggplot(data = salinity, # starting data frame
        aes(sample = `pickleweed`)) + # show normality of pickleweed variable for QQ plot (no x-axis)
- geom_qq()
+ geom_qq() +
+  geom_qq_line()
 
 ggplot(data = salinity, # starting data frame
        aes(sample = `salinity_mS_cm`)) + # show normality of salinity variable for QQ plot (no x-axis)
- geom_qq()
+ geom_qq() + 
+  geom_qq_line()
 
 ```
 
 I checked the assumptions of normality of the continuous variables using QQplots, and linearity using the scatterplot shown in 1b. The QQplots follow a linear trend showing normality with no significant outliers, and the visualization shows a linear trend for the data points using salinity as the predictor and pickleweed as the response.
 
 ### Run Test
+
 ```{r}
 cor.test(salinity$salinity_mS_cm, salinity$pickleweed, #use salinity data to test for correlation
          method = "pearson") #use pearson correlation test 
@@ -67,11 +73,11 @@ cor.test(salinity$salinity_mS_cm, salinity$pickleweed, #use salinity data to tes
 
 ## d. Results communication
 
-To evaluate the strength of the relationship between pickleweed biomass and soil salinity, I used a Pearson's correlation because because both variables (soil salinity in mS/cm and pickleweed biomass in grams) are continuous, normally distributed, and showed linearity with each other. The test showed that there was significantly correlation between salinity (mS/cm) and pickleweed biomass (Pearson's correlation, t(21) = 2.9, p = 0.009, ⍺ = 0.05, 95% CI: 0.16, 0.78). 
+To evaluate the strength of the relationship between pickleweed biomass and soil salinity, I used a Pearson's correlation because because both variables (soil salinity in mS/cm and pickleweed biomass in grams) are continuous, normally distributed, and showed linearity with each other. We found a moderately strong postitive relationship (Pearson's r = 0.53) between salinity (mS/cm) and pickleweed biomass.
 
 ## e. Test implications
 
-Our Pearson's correlation indicates a significant positive linear relationship between salinity (mS/cm) and pickleweed biomass (g), meaning that in order for pickleweed plants to be successful they need to be in saltier conditions. This means that in the event of extreme rain or freshwater input plants may struggle to survive and potentially artificial salt addition may be necessary. This study would benefit from further sampling to solidify this relationship, but without a visible plateau in our scatterplot visualization out planters should lean towards higher salinity. 
+Our Pearson's correlation indicates a significant positive linear relationship between salinity (mS/cm) and pickleweed biomass (g), meaning that in order for pickleweed plants to be successful they need to be in saltier conditions. This means that in the event of extreme rain or freshwater input plants may struggle to survive and potentially artificial salt addition may be necessary. This study would benefit from further sampling to solidify this relationship, but without a visible plateau in our scatterplot visualization out planters should lean towards higher salinity.
 
 ## f. Double check your own work
 
@@ -80,11 +86,11 @@ cor.test(salinity$salinity_mS_cm, salinity$pickleweed, #use salinity data to tes
          method = "spearman") #use spearman correlation test 
 ```
 
-The Spearman's correlation also shows significant correlation between salinity (mS/cm) and pickleweed biomass (g) (rho = 0.59, S = 824, p = 0.003, ⍺ = 0.05). These results led us to the same conclusion of rejecting the null hypothesis that there is no relationship between the variables, however this test uses rank based values rather than raw data so it only asses monotonic relationships not necessarily showing us that the variables are changing at a constant rate. 
+The Spearman's correlation also shows a moderately strong relationship (rho = 0.59) between salinity (mS/cm) and pickleweed biomass. These results led us to the same conclusion as the Pearson's correlation of rejecting the null hypothesis that there is no relationship between the variables, however Pearson's correlation showed a slightly weaker relationship betweent he variables (r = 0.53). The Spearman's test uses rank based values rather than raw data so it only asses monotonic relationships not necessarily showing us that the variables are changing at a constant rate.
 
 # Problem 2. Personal data
 
-## a. 
+## a.
 
 ```{r}
 #| label: Visualization Categorical
@@ -115,8 +121,8 @@ labs(title = "Duration of the workout based on type of exercise completed", #tit
        plot.title = element_text(size = 12)) # making the title font smaller
 ```
 
+### Extra Analysis for personal interest
 
-### Extra Analysis for personal interest 
 ```{r}
 #| label: Visualization Continuous
 running_data <- personal_clean %>% #use to personal_clean data and filter to only include rows with the workout type equal to running 
@@ -133,41 +139,41 @@ theme_minimal() + #different theme from default
 theme(plot.title = element_text(size=12))  #change title font size
 ```
 
-## b. Captions 
+## b. Captions
 
-**Figure 1. Jitterplot of workout duration categorized by type of workout** Points represent measurement for duration of workout and are colored according to workout type: Biking, climbing, gym, running, surfing, tennis. Data collected by the author from 1/15/2026 - 2/26/2026. Accessed via csv download. 
+**Figure 1. Jitterplot of workout duration categorized by type of workout** Points represent measurement for duration of workout and are colored according to workout type: Biking, climbing, gym, running, surfing, tennis. Data collected by the author from 1/15/2026 - 2/26/2026. Accessed via csv download.
 
-**Figure 2. Scatterplot of running distance against average pace for the duration of the workout** Blue points represent average pace of workout (h:mm:ss) at different mileage totals. Data were collected by the author from 1/15/2026 - 2/25/2026 as noted in subtitle. Accessed via csv download. 
+**Figure 2. Scatterplot of running distance against average pace for the duration of the workout** Blue points represent average pace of workout (h:mm:ss) at different mileage totals. Data were collected by the author from 1/15/2026 - 2/25/2026 as noted in subtitle. Accessed via csv download.
 
-# Problem 3. Affective Visualization 
+# Problem 3. Affective Visualization
 
-## a. 
+## a.
 
-For my personal data I am thinking of doing a watercolor painting with black pen illustrating parts of the painting. I plan on having a path meander through the center of the page representing running as the focal point of my workouts and also a representation of time. Each block on the path will represent a day that an activity was recorded with points points that are not running having a distinct icon, and a a runner at the start and the end line to represent how workout went all the way through. In order to include more variables like workout duration and pace, the shade of the block will represent the duration of the workout with darker shades showing longer duration. Outside of the blocks the depiction of the weather above them will represent the weather on the day of that activity. 
+For my personal data I am thinking of doing a watercolor painting with black pen illustrating parts of the painting. I plan on having a path meander through the center of the page representing running as the focal point of my workouts and also a representation of time. Each block on the path will represent a day that an activity was recorded with points points that are not running having a distinct icon, and a a runner at the start and the end line to represent how workout went all the way through. In order to include more variables like workout duration and pace, the shade of the block will represent the duration of the workout with darker shades showing longer duration. Outside of the blocks the depiction of the weather above them will represent the weather on the day of that activity.
 
-## b. Sketch 
+## b. Sketch
 
 ![Affective Visual Sketch](Visual_Draft.png)
 
-## c. Rough Draft  
+## c. Rough Draft
+
 ![Rough Draft](rough_draft.png)
 
-## d. Artist Statement 
+## d. Artist Statement
 
-My piece is demonstrating the journey of my workouts over the course of this quarter with an emphasis on running throughout. In my medium and presentation I took inspiration from Jill Pelto's paintings as they also use water color to depict statistical trends. I created this work by first doing some very light sketching just to outline the painting followed by water color to do the bulk of the picture, blocking it out and adding color and the finer details I used black pen. 
+My piece is demonstrating the journey of my workouts over the course of this quarter with an emphasis on running throughout. In my medium and presentation I took inspiration from Jill Pelto's paintings as they also use water color to depict statistical trends. I created this work by first doing some very light sketching just to outline the painting followed by water color to do the bulk of the picture, blocking it out and adding color and the finer details I used black pen.
 
-## e. Link 
+## e. Link
 
 [View](https://docs.google.com/presentation/d/1bZh40zt9ZVkJDKZNU7cD2fJyYqCPFJibfgQmomVobtk/edit?slide=id.p#slide=id.p)
 
-
-# Problem 4. Statistical crituqe
+# Problem 4. Statistical critique
 
 ## a. Revisit and summarize
 
-An ANOVA or analysis of variance test is included in this paper as well as a Multivariate analysis of variance or MANOVA. The predictor variable is the year, and the response variable is the cover of species within a respective conservatism class (A-0, 1-3, 4-6, 7-10) that indicates how able to species is to thrive in altered environments. The ANOVA test used in this study addresses the question presented by the author by establishing if there was a significant change in species composition over the period of interest. A significant result would be a significant change in each conservatism class size between 1986 and 2019. 
+An ANOVA or analysis of variance test is included in this paper as well as a Multivariate analysis of variance or MANOVA. The predictor variable is the year, and the response variable is the cover of species within a respective conservatism class (A-0, 1-3, 4-6, 7-10) that indicates how able to species is to thrive in altered environments. The ANOVA test used in this study addresses the question presented by the author by establishing if there was a significant change in species composition over the period of interest. A significant result would be a significant change in each conservatism class size between 1986 and 2019.
 
-![Table](Stat_critique_table 2.png)
+![Table](Stat_critique_table%202.png)
 
 ## b. Visual clarity
 
@@ -177,6 +183,6 @@ The table clearly represents the data from the tests by appropriately labeling a
 
 The authors did a good job at mitigating visual clutter but there is some repetition present. For ANOVA conservatism class is bolded and clearly not part of the table depicting results which is good. For the MANOVA the variables are also bolded but this section is not titled. Additionally variables for the ANOVA are not bolded and are re-listed for every conservatism class which is a bit repetitive. Significant results are signaled with an asterisk but that information is also repetitive as the p-value being so small clearly shows significance.
 
-## d. Recommendations 
+## d. Recommendations
 
 Firstly I would actually separate the MANOVA and ANOVA tables and add a title to the section displaying the MANOVA results so that it is uniform with the titles of the ANOVA results and differentiates it as a separate test. I would also bold the variables used in the ANOVA test and only list them once on the table as they remain the same for each proceeding test. Finally I would shrink the column for degrees of freedom as it has a lot of empty space and remove the asterisk from the p-value instead listing it as \<0.001.
